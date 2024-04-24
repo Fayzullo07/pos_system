@@ -1,0 +1,25 @@
+import connectMongoDB from "@/lib/mongodb";
+import Chef from "@/models/chefModel";
+import { NextResponse } from "next/server";
+
+
+export const PATCH = async (req: any, { params }: { params: any }) => {
+    const { id } = params;
+    const { isFinished, isActive } = await req.json();
+    await connectMongoDB()
+
+    try {
+        
+        await Chef.findByIdAndUpdate(id, {
+            isFinished,
+            isActive
+        });
+
+        return NextResponse.json({ message: "Updated succesfully" }, { status: 201 })
+    } catch (error) {
+        return NextResponse.json({ data: null }, { status: 500 })
+    }
+}
+
+
+
