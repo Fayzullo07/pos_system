@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 
 const Navbar = () => {
     const pathname = usePathname();
-
+// test
     return (
         <div className={` w-full z-50 bg-white border-b backdrop-blur-lg bg-opacity-80 ${pathname == "/" ? "hidden" : ""}`}>
             <div className="mx-auto max-w-7xl px-6 sm:px-6 lg:px-8 ">
