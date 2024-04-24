@@ -11,6 +11,9 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
             return await categoryOrderGetAPI();
         }
     });
+    function probel(text: any) {
+        return text.replace(/\s/g, '=');
+    }
 
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Xatolik yuz berdi...</div>;
@@ -23,7 +26,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
 
                         {data?.data.categories.map((item: any, i: number) => (
                             <li key={i} className=" border-b">
-                                <Link href={`/order/product/${item.name}`} className='flex rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
+                                <Link href={`/order/product/${probel(item.name)}`} className='flex rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
                                     <span className='flex items-center gap-3'>
                                         {item.name}
                                     </span>
