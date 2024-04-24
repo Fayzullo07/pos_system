@@ -1,24 +1,8 @@
 "use client"
-import { useEffect, useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-
-import Image from "next/image";
-
 const Navbar = () => {
-    const [stickyNav, setStickyNav] = useState(false);
-
     const pathname = usePathname();
-
-    const handleScroll = () => {
-        window.pageYOffset >= 10 ? setStickyNav(true) : setStickyNav(false);
-    };
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => window.addEventListener("scroll", handleScroll);
-    });
 
     return (
         <div className={` w-full z-50 bg-white border-b backdrop-blur-lg bg-opacity-80 ${pathname == "/" ? "hidden" : ""}`}>
@@ -26,7 +10,7 @@ const Navbar = () => {
                 <div className="relative flex h-16 justify-between">
                     <div className="flex flex-1 items-stretch justify-start">
                         <a className="flex flex-shrink-0 items-center" href="#">
-                            <img className="block h-12 w-auto" src="https://www.svgrepo.com/show/501888/donut.svg" />
+                            LOGO
                         </a>
                     </div>
                     <div className="flex-shrink-0 flex px-2 py-3 items-center space-x-8">

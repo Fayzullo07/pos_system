@@ -73,7 +73,7 @@ const Admin = () => {
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
                             {data?.data.categories.map((item: any, i: number) => (
-                                <tr >
+                                <tr key={i} >
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="text-base text-gray-900">{item.name}</div>
                                     </td>
