@@ -8,14 +8,16 @@ export const POST = async (req: any) => {
     await connectMongoDB()
 
     try {
-        await OrderNumber.create({
-            orderNumber
-        });
-
-        await Chef.create({
+        const order = await Chef.create({
             orders,
             orderNumber
         });
+        console.log(order);
+
+        await OrderNumber.create({
+            orderNumber: order._id
+        });
+
 
         return NextResponse.json({ message: "Created succesfully" }, { status: 201 })
     } catch (error) {

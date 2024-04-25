@@ -1,11 +1,16 @@
 "use client"
-import { chefGetAPI } from "@/api/AdminRequest";
+import { chefGetAPI, chefPatchAPI } from "@/api/AdminRequest";
 import Container from "@/components/Core/Container";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 
 const Chef = () => {
+    const [patchData, setPatchData] = useState({
+        isFinished: Boolean,
+        isActive: Boolean,
+        orderNumber: ""
+    });
 
     const { data, isLoading, isError } = useQuery({
         queryKey: ["orderschef"],
@@ -14,13 +19,31 @@ const Chef = () => {
         },
         refetchInterval: 1000
     });
+
+    const mutationPatch = useMutation(
+        {
+            mutationFn: async (id: any) => {
+                return chefPatchAPI(patchData, id);
+            },
+            onSuccess: () => {
+            }
+        }
+    );
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Xatolik yuz berdi...</div>;
 
+    const PatchData = (id: any, isFinished: any, isActive: any, orderNumber: any) => {
+        setPatchData({
+            isFinished,
+            isActive,
+            orderNumber
+        })
+        mutationPatch.mutate(id);
+    }
     return (
         <div>
             <Container>
-                <div className="mb-5 border p-2">
+                <div className="mb-5 p-2">
                     {data?.data.orders.map((item: any, i: number) => (
                         <div key={i} className=" mb-5 border border-blue-500 rounded-md">
                             <div className="flex justify-between items-center">
@@ -29,8 +52,21 @@ const Chef = () => {
 
                                 </div>
                                 <div className="flex">
-                                    <button className="p-2 px-4 border text-base hover:border-red-500 hover:text-red-500">Delete</button>
-                                    <button className="p-2 px-4 border text-base hover:border-green-500 hover:text-green-500">Finish</button>
+                                    {item.isActive && (
+                                        <button
+                                            onClick={() => {
+                                                PatchData(item._id, item.isFinished, !item.isActive, item.orderNumber)
+                                            }}
+                                            className="p-2 px-4 border text-base hover:border-red-500 hover:text-red-500">Delete</button>
+                                    )}
+                                    {!item.isFinished && (
+                                        <button
+                                            onClick={() => {
+                                                PatchData(item._id, !item.isFinished, item.isActive, item.orderNumber)
+                                            }}
+                                            disabled={mutationPatch.isPending}
+                                            className="p-2 px-4 border text-base hover:border-green-500 hover:text-green-500">Finish</button>
+                                    )}
                                 </div>
                             </div>
 
