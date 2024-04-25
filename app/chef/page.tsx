@@ -29,7 +29,6 @@ const Chef = () => {
 
                                 </div>
                                 <div className="flex">
-
                                     <button className="p-2 px-4 border text-base hover:border-red-500 hover:text-red-500">Delete</button>
                                     <button className="p-2 px-4 border text-base hover:border-green-500 hover:text-green-500">Finish</button>
                                 </div>

@@ -110,7 +110,7 @@ const Product = () => {
                                         <button className="ml-2 text-red-600 hover:text-red-900" onClick={() => handeDelete(item._id)}>Delete</button>
                                     </td>
                                 </tr>
-                            ))}
+                            )).reverse()}
                         </tbody>
                     </table>
                 </div>

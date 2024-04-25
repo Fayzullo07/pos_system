@@ -111,7 +111,7 @@ const AddProduct = () => {
             </div>
             <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                 <div>
-                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Category Name</label>
+                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
                     <input
                         type="text"
                         name="name"
