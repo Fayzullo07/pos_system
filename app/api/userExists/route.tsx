@@ -8,7 +8,6 @@ export const POST = async (req: NextRequest) => {
 
     try {
 
-
         const user = await User.find({ login }).select("_id");
 
         return NextResponse.json({ user }, { status: 201 })

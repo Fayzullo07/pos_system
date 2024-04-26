@@ -8,10 +8,7 @@ export const authOptions = {
     providers: [
         CredentialsProvider({
             name: "credentials",
-            credentials: {
-                login: { label: "Username", type: "text" },
-                password: { label: "Password", type: "password" }
-            },
+            credentials: {},
             async authorize(credentials: any) {
                 await connectMongoDB();
                 const { login, password } = credentials;
