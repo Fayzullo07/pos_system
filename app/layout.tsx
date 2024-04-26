@@ -7,6 +7,7 @@ import TopLoader from "@/utils/top-loader";
 
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import AuthProvider from "@/components/Core/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,22 +23,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light" />
-        <Provider>
-          <TopLoader />
-          <Navbar />
-          {children}
-        </Provider>
+        <AuthProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light" />
+          <Provider>
+            <TopLoader />
+            <Navbar />
+            {children}
+          </Provider>
+        </AuthProvider>
       </body>
     </html>
   );

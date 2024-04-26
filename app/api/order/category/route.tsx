@@ -2,8 +2,6 @@ import connectMongoDB from "@/lib/mongodb";
 import Category from "@/models/categoryModel";
 import { NextRequest, NextResponse } from "next/server";
 
-
-
 export const GET = async (req: NextRequest) => {
     await connectMongoDB();
     try {

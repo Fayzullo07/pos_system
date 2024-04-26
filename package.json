@@ -16,6 +16,7 @@
     "@tanstack/react-query": "^5.31.0",
     "@tanstack/react-query-devtools": "^5.32.0",
     "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "filestack-react": "^5.0.0",
@@ -31,6 +32,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/filestack-react": "^4.0.4",
     "@types/node": "^20",
     "@types/react": "^18",

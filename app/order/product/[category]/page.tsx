@@ -38,8 +38,8 @@ const Order = ({ params }: { params: any }) => {
             })
             setOrders([...newOrder]);
         }
-        if (orders !== null) {
-            localStorage.setItem('orders', JSON.stringify(orders));
+        if (newOrder !== null) {
+            localStorage.setItem('orders', JSON.stringify(newOrder));
         }
     }
 
@@ -66,14 +66,14 @@ const Order = ({ params }: { params: any }) => {
         })
         setOrders([...newOrder]);
         if (orders !== null) {
-            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('orders', JSON.stringify(newOrder));
         }
     }
     const deleteOrder = (index: number) => {
         let newOrder = orders.filter((item: any, i: number) => i != index);
         setOrders(newOrder);
         if (orders !== null) {
-            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('orders', JSON.stringify(newOrder));
         }
     }
 
@@ -96,7 +96,7 @@ const Order = ({ params }: { params: any }) => {
                 console.error('Error while parsing localStorage data:', error);
             }
         }
-    }, []);
+    }, [category]);
 
 
     const mutation = useMutation(

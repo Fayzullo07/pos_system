@@ -8,7 +8,6 @@ export const GET = async (req: any, { params }: { params: any }) => {
     function probel(text: any) {
         return text.replace("=", ' ');
     }
-    console.log(probel(id));
 
     try {
         let products = await Product.find({ isActive: true, category: probel(id) });
@@ -17,7 +16,6 @@ export const GET = async (req: any, { params }: { params: any }) => {
         return NextResponse.json({ products: [] }, { status: 500 })
     }
 }
-
 
 
 
