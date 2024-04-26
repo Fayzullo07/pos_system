@@ -1,7 +1,7 @@
 import { getToken } from "next-auth/jwt";
 export { default } from "next-auth/middleware"
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+// import type { NextRequest } from "next/server";
 // import { TypeUser } from "./app/api/auth/[...nextauth]/options";
 
 // This function can be marked `async` if using `await` inside
