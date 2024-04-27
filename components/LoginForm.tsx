@@ -12,6 +12,7 @@ const LoginForm = () => {
         password: ""
     });
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -31,6 +32,7 @@ const LoginForm = () => {
     );
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        setLoading(true);
         if (!formData.login || !formData.password) {
             setError("All fields are necessary!");
             return
@@ -46,6 +48,7 @@ const LoginForm = () => {
                 setError("Invalid Credentials");
                 return;
             }
+            setLoading(false);
             router.replace("/");
         } catch (error) {
             console.log(error);
@@ -92,8 +95,8 @@ const LoginForm = () => {
                         <div className="p-1 px-4 inline-block text-white text-base tracking-wider bg-red-500 rounded-full">{error}</div>
                     )}
                     <div>
-                        <button type="submit" className="w-full bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded-lg">
-                            Log In
+                        <button disabled={loading} type="submit" className="w-full bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded-lg">
+                            {!loading ? "Login" : "Loading..."}
                         </button>
                     </div>
                 </form>

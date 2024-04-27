@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import LoginForm from "@/components/LoginForm";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 const Login = async () => {
     const session = await getServerSession(authOptions);
