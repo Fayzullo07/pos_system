@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
     const pathname = usePathname();
     const { data: session } = useSession();
+    console.log(session);
+    
 
     return (
         <div className={` ${pathname == "/login" ? "hidden" : ""} w-full z-50 bg-white border-b backdrop-blur-lg bg-opacity-80`}>
