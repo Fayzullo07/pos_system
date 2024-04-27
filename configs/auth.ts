@@ -43,10 +43,19 @@ export const authOptions: AuthOptions = {
             }
         })
     ],
-    session: {
-        strategy: 'jwt'  // Using JSON Web Tokens for session strategy
+    callbacks: {
+        async jwt({ token, user }) {
+            return { ...token, ...user };
+        },
+        async session({ session, token, user }) {
+            session.user = token as any;
+            return session;
+        },
     },
-    secret: process.env.NEXTAUTH_SECRET,  // Secret used to encrypt the JWT
+    // session: {
+    //     strategy: 'jwt'  // Using JSON Web Tokens for session strategy
+    // },
+    // secret: process.env.NEXTAUTH_SECRET,  // Secret used to encrypt the JWT
     pages: {
         signIn: "/login"  // Custom sign-in page path
     }
