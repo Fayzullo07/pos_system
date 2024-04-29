@@ -79,7 +79,7 @@ const Order = ({ params }: { params: any }) => {
 
 
     const { data, isLoading, isError } = useQuery({
-        queryKey: ["products"],
+        queryKey: ["products", category],
         queryFn: async () => {
             return await productOrderGetAPI({ category });
         }

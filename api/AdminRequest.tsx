@@ -56,9 +56,8 @@ export const productGetOneAPI = async ({ id }: { id: any }) =>
 
 // -----------------------------------------ORDER PRODUCT-----------------------------
 // GET
-export const productOrderGetAPI = async ({ category = "" }) =>
-    API.get(`/api/order/product/${category}`);
-
+export const productOrderGetAPI = async ({ category }: { category: String }) =>
+    API.get(`/api/order/product/?category=${category}`);
 
 // -----------------------------------------ORDER CATEGORY-----------------------------
 // GET
