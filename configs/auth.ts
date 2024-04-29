@@ -55,7 +55,7 @@ export const authOptions: AuthOptions = {
     // session: {
     //     strategy: 'jwt'  // Using JSON Web Tokens for session strategy
     // },
-    // secret: process.env.NEXTAUTH_SECRET,  // Secret used to encrypt the JWT
+    secret: process.env.NEXTAUTH_SECRET,  // Secret used to encrypt the JWT
     pages: {
         signIn: "/login"  // Custom sign-in page path
     }
