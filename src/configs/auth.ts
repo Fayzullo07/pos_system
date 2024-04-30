@@ -1,5 +1,4 @@
 import NextAuth from "next-auth"
-
 import type { NextAuthConfig } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 
@@ -11,24 +10,21 @@ export const config = {
                 login: { label: "username", type: "text" },
                 password: { label: "password", type: "password" },
             },
-            authorize(c) {
-                // if (c.password) return null;
-                return {
-                    login: c.login,
-                    password: c.password,
-                    id: "1",
-                };
+            authorize(c: any) {
+                if (c.password != '12345') return null;
+                const user = { id: "1", name: c.login, role: "admin77", password: c.password }
+                return user
             },
         }),
     ],
     callbacks: {
         authorized({ request, auth }) {
             const { pathname } = request.nextUrl
-            if (pathname === "/middleware-example") return !!auth
+            if (pathname === "/admin") return !!auth
             return true
         },
         jwt({ token, trigger, session }) {
-            if (trigger === "update") token.name = session.user.name
+            if (trigger === "update") token.login = session.user.login
             return token
         },
     },

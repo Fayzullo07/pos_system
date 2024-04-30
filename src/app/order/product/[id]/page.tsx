@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Order = ({ params }: { params: any }) => {
-    const { category } = params;
+    const { id } = params;
     const [orders, setOrders] = useState<any[]>([]);
 
     const AddProduct = (item: any) => {
@@ -79,9 +79,9 @@ const Order = ({ params }: { params: any }) => {
 
 
     const { data, isLoading, isError } = useQuery({
-        queryKey: ["products", category],
+        queryKey: ["products", id],
         queryFn: async () => {
-            return await productOrderGetAPI({ category });
+            return await productOrderGetAPI({ category: id });
         }
     });
 
@@ -96,7 +96,7 @@ const Order = ({ params }: { params: any }) => {
                 console.error('Error while parsing localStorage data:', error);
             }
         }
-    }, [category]);
+    }, [id]);
 
 
     const mutation = useMutation(

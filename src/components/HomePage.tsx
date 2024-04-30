@@ -21,6 +21,10 @@ const HomePage = () => {
     {
       slug: '/login',
       name: "Login"
+    },
+    {
+      slug: '/admin',
+      name: "Admin"
     }
   ]
 
