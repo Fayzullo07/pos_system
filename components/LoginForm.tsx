@@ -43,14 +43,18 @@ const LoginForm = () => {
                 password: formData.password,
                 redirect: false
             });
+            // console.log(res);
+            
 
             if (res?.error) {
                 setError("Invalid Credentials");
+                setLoading(false);
                 return;
             }
             setLoading(false);
             router.replace("/");
         } catch (error) {
+            setLoading(false);
             console.log(error);
 
         }

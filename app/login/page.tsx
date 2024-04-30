@@ -1,8 +1,11 @@
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/LoginForm";
+import { auth } from "@/configs/auth";
 
 const Login = async () => {
-    // if (session) redirect("/");
+    const session = await auth();
+    if (session) redirect("/");
+
 
     return <LoginForm />
 }

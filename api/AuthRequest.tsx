@@ -14,3 +14,7 @@ const API = axios.create({ baseURL: URL });
 // POST
 export const registerPostAPI = async (data: any) =>
     API.post(`/api/register`, data);
+
+// POST
+export const userExistPostAPI = async (data: any) =>
+    API.post(`/api/userExists`, data);

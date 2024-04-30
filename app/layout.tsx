@@ -23,24 +23,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light" />
-          <Provider>
-            <TopLoader />
-            <Navbar />
-            {children}
-          </Provider>
-        </AuthProvider>
+
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light" />
+        <Provider>
+          <TopLoader />
+          <Navbar />
+          {children}
+        </Provider>
       </body>
     </html>
   );
