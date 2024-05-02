@@ -29,7 +29,6 @@ const HomePage = () => {
   ]
 
   const { data: session, status } = useSession()
-  console.log(session);
 
   // useEffect(() => {
   //   router.push("/login")

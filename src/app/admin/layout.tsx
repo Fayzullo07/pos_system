@@ -3,7 +3,7 @@ import { auth } from "@/configs/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
     const data_links = [
         {
             slug: "/",
@@ -15,8 +15,8 @@ export default async function Layout({ children }: Readonly<{ children: React.Re
         }
     ]
 
-    const session = await auth();
-    if (!session) redirect("/login");
+    // const session = await auth();
+    // if (!session) redirect("/login");
 
     return (
         <div className=''>
