@@ -15,7 +15,7 @@ export const POST = async (req: any) => {
         console.log(order);
 
         await OrderNumber.create({
-            orderNumber: order._id
+            orderNumber
         });
 
 

@@ -25,8 +25,8 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                     <ul className='text-gray-500 font-semibold gap-2'>
 
                         {data?.data.categories.map((item: any, i: number) => (
-                            <li key={i} className=" border-b">
-                                <Link href={`/order/product/${item.name}`} className='flex rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
+                            <li key={i} className="border-b border-green-500 rounded-full">
+                                <Link href={`/order/product/${item.name}`} className=' rounded-full flex  px-3 py-2 hover:text-black hover:bg-gray-50 transition-all'>
                                     <span className='flex items-center gap-3'>
                                         {item.name}
                                     </span>

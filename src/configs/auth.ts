@@ -16,9 +16,10 @@ export const config = {
             credentials: {
                 login: { label: "username", type: "text" },
                 password: { label: "password", type: "password" },
+                role: { label: "role", type: "text" }
             },
             authorize(c: any) {
-                if (c.password != '12345') return null;
+                if (!c?.login || !c.password) return null;
                 const user = { id: "1", name: c.login, role: "admin77", password: c.password }
                 return user
             },

@@ -48,16 +48,17 @@ const Chef = () => {
                         <div key={i} className=" mb-5 border border-blue-500 rounded-md">
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <h1 className="p-2 text-base">#{item.orderNumber}</h1>
+                                    <b className="p-2 text-2xl">#{item.orderNumber}</b>
 
                                 </div>
                                 <div className="flex">
                                     {item.isActive && (
                                         <button
+                                            disabled={mutationPatch.isPending}
                                             onClick={() => {
                                                 PatchData(item._id, item.isFinished, !item.isActive, item.orderNumber)
                                             }}
-                                            className="p-2 px-4 border text-base hover:border-red-500 hover:text-red-500">Delete</button>
+                                            className={`p-2 px-4 border text-base ${!mutationPatch.isPending && "hover:border-red-500 hover:text-red-500"}  `}>{!mutationPatch.isPaused ? "Delete" : "Loading..."}</button>
                                     )}
                                     {!item.isFinished && (
                                         <button
@@ -65,7 +66,7 @@ const Chef = () => {
                                                 PatchData(item._id, !item.isFinished, item.isActive, item.orderNumber)
                                             }}
                                             disabled={mutationPatch.isPending}
-                                            className="p-2 px-4 border text-base hover:border-green-500 hover:text-green-500">Finish</button>
+                                            className={`p-2 px-4 border text-base ${!mutationPatch.isPending && "hover:border-green-500 hover:text-green-500"}  `}>{!mutationPatch.isPaused ? "Finish" : "Loading..."}</button>
                                     )}
                                 </div>
                             </div>
@@ -78,6 +79,9 @@ const Chef = () => {
                                         </th>
                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Product Name
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Product Category
                                         </th>
                                         <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Product Count
@@ -101,6 +105,9 @@ const Chef = () => {
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="text-base text-gray-900">{order.name}</div>
                                             </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <div className="text-base text-gray-900">{order.category}</div>
+                                            </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-center">
                                                 <div className="text-base text-gray-900 font-semibold">{order.count}</div>
                                             </td>
@@ -112,7 +119,7 @@ const Chef = () => {
                                 </tbody>
                             </table>
                         </div>
-                    ))}
+                    )).reverse()}
                     <div>
 
                     </div>

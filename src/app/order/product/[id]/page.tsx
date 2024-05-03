@@ -8,6 +8,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+function getRandomThreeDigitNumber() {
+    return Math.floor(Math.random() * 900) + 100;
+}
+
 const Order = ({ params }: { params: any }) => {
     const { id } = params;
     const [orders, setOrders] = useState<any[]>([]);
@@ -25,6 +29,7 @@ const Order = ({ params }: { params: any }) => {
                 count: 1
             }
             setOrders([...orders, newItem]);
+            localStorage.setItem('orders', JSON.stringify([...orders, newItem]));
         } else {
             newOrder = orders.map((orderItem, index) => {
                 if (index === indexItem) {
@@ -37,8 +42,6 @@ const Order = ({ params }: { params: any }) => {
                 }
             })
             setOrders([...newOrder]);
-        }
-        if (newOrder !== null) {
             localStorage.setItem('orders', JSON.stringify(newOrder));
         }
     }
@@ -84,7 +87,14 @@ const Order = ({ params }: { params: any }) => {
             return await productOrderGetAPI({ category: id });
         }
     });
+    let localStorageRandom = "";
+    localStorageRandom = localStorage.getItem('random');
+    if (!localStorageRandom) {
+        const random_num = getRandomThreeDigitNumber();
+        localStorage.setItem('random', JSON.stringify(random_num));
+        localStorageRandom = random_num.toString();
 
+    }
     useEffect(() => {
         // Brauzerdagi Local Storage-dan malumotni o'qish
         const localStorageData = localStorage.getItem('orders');
@@ -102,7 +112,7 @@ const Order = ({ params }: { params: any }) => {
     const mutation = useMutation(
         {
             mutationFn: async () => {
-                return orderPostAPI({ orderNumber: 123, orders });
+                return orderPostAPI({ orderNumber: localStorageRandom, orders });
             },
             onSuccess: () => {
                 toast.success("Successfully. Wait a minute");
@@ -117,11 +127,12 @@ const Order = ({ params }: { params: any }) => {
 
 
     const handeOrder = () => {
-        const isOrder = confirm("Do you want to order?\nYour id number 555")
+        const isOrder = confirm(`Do you want to order?\nYour ID number ${localStorageRandom}`)
         if (isOrder) {
             mutation.mutate()
         }
     }
+
     return (
         <div>
             <Container>
@@ -177,9 +188,13 @@ const Order = ({ params }: { params: any }) => {
                     </div>
                     <div>
 
-                        <div className={`p-4 bg-white col-span-1 sticky top-10 ${orders.length != 0 && 'border'}`}>
+                        <div className={`p-4 bg-white col-span-1 sticky top-10 ${orders.length != 0 ? 'border' : "hidden"}`}>
+                            <div className="mb-5">
+                                <h1 className="text-xl">Your order ID:  <span className="font-bold text-2xl tracking-wider">{localStorageRandom}</span></h1>
+                            </div>
                             {orders.map((item: any, i: number) => (
                                 <div key={i} className="flex justify-between items-center text-sm mb-2 border-b">
+
                                     <div>
                                         <div className="flex items-center">
                                             <Image
@@ -206,41 +221,20 @@ const Order = ({ params }: { params: any }) => {
                             ))}
                             {orders.length != 0 && (
                                 <div className="bg-white  p-2">
+
                                     <div className="flex justify-between mb-2">
                                         <span className="font-semibold">Total</span>
                                         <span className="font-semibold">${totalPrice}</span>
                                     </div>
-                                    <Modal button={<button disabled={mutation.isPending} className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full" onClick={handeOrder}>{!mutation.isPending ? "Order" : "Loading..."}</button>}>
-                                        {/* <ScrollArea className="h-[40vh] py-4"> */}
+                                    <div className="flex items-center justify-between gap-2">
 
-                                        {orders.map((item: any, i: number) => (
-                                            <div key={i} className="flex justify-between items-center text-sm mb-2 border-b">
-                                                <div>
-                                                    <div className="flex items-center">
-                                                        <Image
-                                                            src={item.photo}
-                                                            width={0}
-                                                            height={0}
-                                                            className="mr-4"
-                                                            // className=" transition hover:scale-110 duration-300"
-                                                            sizes="100vw"
-                                                            style={{ width: '40px', height: 'auto' }} // optional
-                                                            alt="Image"
-                                                        />
-                                                        <span className="font-medium">{item.name}</span>
-                                                    </div>
-                                                </div>
-                                                <div>${item.price}</div>
-                                                <div className="flex items-center justify-between">
-                                                    <button className="border rounded p-1" onClick={() => incrementOrder(i)}><MinusIcon size={12} /></button>
-                                                    <span className="p-2">{item.count}</span>
-                                                    <button className="border rounded p-1" onClick={() => AddProduct({ _id: item.id })}><PlusIcon size={12} /></button>
-                                                    <div className=" ml-2 cursor-pointer" onClick={() => deleteOrder(i)}><XIcon size={12} /></div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                        {/* </ScrollArea> */}
-                                    </Modal>
+                                        <button className="bg-blue-500 text-white py-1.5 px-4 rounded-lg mt-4 w-full" onClick={() => {
+                                            localStorage.clear();
+                                            setOrders([]);
+                                        }}>Clear All</button>
+                                        <button disabled={mutation.isPending} className="bg-green-500 text-white py-1.5 px-4 rounded-lg mt-4 w-full" onClick={handeOrder}>{!mutation.isPending ? "Order" : "Loading..."}</button>
+                                    </div>
+
 
                                 </div>
                             )}

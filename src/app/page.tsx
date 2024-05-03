@@ -8,8 +8,7 @@ const Home = async () => {
   const session = await auth()
   if (session?.user) {
     session.user = {
-      name: session.user.name,
-      id: session.user.id,
+      ...session.user,
     }
   }
   return (
