@@ -13,12 +13,12 @@ const Chef = () => {
         orderNumber: ""
     });
 
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ["orderschef"],
         queryFn: async () => {
             return await chefGetAPI();
         },
-        refetchInterval: 1000
+        // refetchInterval: 1000
     });
 
     const mutationPatch = useMutation(
@@ -27,6 +27,7 @@ const Chef = () => {
                 return chefPatchAPI(patchData, id);
             },
             onSuccess: () => {
+                refetch();
                 toast.success("Changed");
             }
         }
