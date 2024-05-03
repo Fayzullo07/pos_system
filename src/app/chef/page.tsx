@@ -4,6 +4,7 @@ import Container from "@/components/Core/Container";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Chef = () => {
     const [patchData, setPatchData] = useState({
@@ -26,6 +27,7 @@ const Chef = () => {
                 return chefPatchAPI(patchData, id);
             },
             onSuccess: () => {
+                toast.success("Changed");
             }
         }
     );
